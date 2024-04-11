@@ -1,0 +1,22 @@
+.navbar {
+    position: sticky;
+    top: 93vh;
+}
+
+.navbar__lista {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar__links {
+    display: inline;
+}
+
+.navbar_link {
+    text-decoration: none;
+    color: var(--branco);
+    padding: 5px 10px;
+}

@@ -1,0 +1,13 @@
+.saudacoes {
+    padding-top: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.saudacoes__titulo {
+    font-size: 24px;
+}
+.saudacoes__subtitulo {
+    font-size: 14px;
+}
