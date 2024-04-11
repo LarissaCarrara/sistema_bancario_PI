@@ -1,5 +1,5 @@
 # sistema_bancario_PI
 
-cd safenet
-npm install
-npm start
+cd safenet<br>
+npm install<br>
+npm start<br>
