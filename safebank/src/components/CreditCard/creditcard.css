@@ -1,0 +1,35 @@
+.cartao {
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    background: rgb(1,38,38);
+    background: linear-gradient(0deg, rgba(1,38,38,1) 0%, rgba(3,140,140,1) 100%);
+    
+}
+
+.cartao__container{
+    position: relative;
+}
+
+.cartao__bandeira {
+    position: absolute;
+    top: 0;
+    left: 19px;
+}
+
+.cartao__conteudo {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    color: #FFFFFF;
+}
+
+.cartao__numero {
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.cartao__nome {
+    font-size: 8px;
+}

@@ -1,0 +1,23 @@
+.saldo {
+    margin-top: 4rem;
+    display: flex;
+    gap: 24px;
+}
+
+.saldo__nome {
+    font-size: 14px;
+}
+
+.saldo__valor {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.saldo__valor_centavos {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.creditcard {
+    margin: 24px 0;
+}
