@@ -1,0 +1,84 @@
+/* Saudações */
+
+.saudacoes {
+    width: 100%;
+    padding-top: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.saudacoes__titulo {
+    font-size: 32px;
+    font-weight: 600;
+}
+.saudacoes__subtitulo {
+    font-size: 14px;
+}
+
+
+/* Saldo */
+.saldo {
+    margin-top: 4rem;
+    display: flex;
+    gap: 24px;
+}
+
+.saldo__nome {
+    font-size: 14px;
+}
+
+.saldo__valor {
+    font-size: 24px;
+    font-weight: 600;
+}
+.sumir{
+    display: none;
+}
+
+.saldo__valor_centavos {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.creditcard {
+    margin: 24px 0;
+}
+
+/* Cartão */
+
+.cartao {
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    background: rgb(1,38,38);
+    background: linear-gradient(0deg, rgba(1,38,38,1) 0%, rgba(3,140,140,1) 100%);
+    
+}
+
+.cartao__container{
+    position: relative;
+}
+
+.cartao__bandeira {
+    position: absolute;
+    top: 0;
+    left: 19px;
+}
+
+.cartao__conteudo {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    color: #FFFFFF;
+}
+
+.cartao__numero {
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.cartao__nome {
+    font-size: 8px;
+}

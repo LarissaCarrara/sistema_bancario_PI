@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./home.css">
+</head>
+<body onload="carregardados()">
+
+  <!-- Header do Home -->
+    <header class="saudacoes__container">
+
+        <div class='saudacoes'>
+            <div class='saudacoes__texto'>
+                <p class='saudacoes__titulo'>Hi </p>
+            </div>
+                <img class="imagem__tit"
+                    src='../imagens/img_perfil.png'
+                    alt='Icone de perfil' 
+                />
+        </div>
+    </header>
+    
+    <!-- Saldo -->
+        <div class='saldo'>
+          <div class='saldo__container'>
+            <p class='saldo__nome'>Saldo em conta</p>
+            <p class='saldo__valor'>R$ <a class='saldo__valor_centavos'></a></p>
+          </div>
+          <img class="icone__olho" onclick="ocultar()"
+            src='../imagens/olho.svg' 
+            alt=''
+          />
+        </div>
+    <!-- Cartão de Crédito -->
+        <section class='creditcard'>
+          <div class='cartao__container'>
+        
+            <div class='cartao'>
+            </div>
+            <img 
+                src='../imagens/mastercard.svg'
+                alt='logo da mastercard'
+                class='cartao__bandeira'
+            />
+            <div class='cartao__conteudo'>
+                <p class='cartao__numero'>**** **** **** 2131</p>
+                <p class='cartao__nome'>Larissa M Carrara</p>
+            </div>
+        </div>
+        </section>
+      </div>
+
+
+</body>
+<script src="home.js"></script>
+</html>
