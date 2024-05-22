@@ -8,6 +8,7 @@ const login = (req, res) => {
     con.query(query, (err, response) => {
         console.log(response);
         if (response.length > 0) {
+            console.log(response[0].senha)
             if (response[0].senha == senha) {
                 res.status(202).end();
             }
