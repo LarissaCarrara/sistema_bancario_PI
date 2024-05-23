@@ -1,5 +1,11 @@
-cpf = document.querySelector("#cpf");
-senha = document.querySelector("#senha");
+const cpf = document.querySelector("#cpf");
+const senha = document.querySelector("#senha");
+
+
+const urlDev = "http://localhost:3000/login";
+
+const urlProd = "https://sistema-bancario-pi.onrender.com/login";
+
 function entrar(){
     const usuario = {
         "cpf": cpf.value,
@@ -7,7 +13,7 @@ function entrar(){
     }
     console.log(usuario);
 
-    fetch('http://localhost:3000/login', 
+    fetch(urlProd, 
     {
        method: 'POST',
        headers: {'Content-Type': 'application/json'},
