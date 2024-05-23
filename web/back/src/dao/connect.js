@@ -10,6 +10,5 @@ const con = new Client({
   database: 'sistema_bancario',
 })
 
-con.connect()
 
 module.exports = con;
