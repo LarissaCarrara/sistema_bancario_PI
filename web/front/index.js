@@ -18,14 +18,11 @@ function entrar(){
        method: 'POST',
        headers: {'Content-Type': 'application/json'},
        body: JSON.stringify(usuario)
-    }) .then(resp => {
-            return resp.status;
-        })
-        .then(data => {
-            if (data == 202) {
-                console.log(data);
-                window.location.href = "./home.html";
-            }
-        })
-
+    }) .then(data => {
+        console.log(data)
+        if (data.status == 200) {
+            console.log(data);
+            window.location.href = "./Home";
+        }
+    })
 }

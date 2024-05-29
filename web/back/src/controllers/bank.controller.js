@@ -38,7 +38,6 @@ const listardados = async (req, res) => {
 module.exports = {
     login,
     listardados,
-
 }
 
 //200-deu certo 201 - criou  202- aceito 400-erro 404- não encontrado 500-erro mto grave- tabela http
