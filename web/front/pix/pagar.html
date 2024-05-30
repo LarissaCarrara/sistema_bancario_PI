@@ -9,7 +9,7 @@
 </head>
 <body>
     <section class="pagar">
-        
+        <!-- header -->
         <div class="header">
             <a href="./pix.html" class="voltar">
                 < voltar
@@ -17,10 +17,11 @@
             
             <h1 class="pix__titulo">Pagar</h1>
         </div>
-        
+        <!-- container -->
         <div class="pagar__chave">
             <h1>Chave</h1>
-            <input type="text" placeholder="Digite o CPF">
+            <input type="text" placeholder="Digite o CPF" id="cpfPix">
+            <input type="button" value="Entrar" id="botao" onclick="fazerPix()">
 
             
             <div class="pagar__outras">
@@ -54,5 +55,6 @@
             </div>
         </div>
     </section>
+    <script src="./pix.js"></script>
 </body>
 </html>

@@ -34,10 +34,22 @@ const listardados = async (req, res) => {
     }
 }
 
+const consultarPix = async (req, res) => {
+    const cpf = req.body;
+    console.log(req.body)
+
+    const clinetePix = await prisma.cliente.findUnique({
+        where: {
+            cpf
+        }
+    })
+}
+
 
 module.exports = {
     login,
     listardados,
+    consultarPix,
 }
 
 //200-deu certo 201 - criou  202- aceito 400-erro 404- não encontrado 500-erro mto grave- tabela http
