@@ -13,49 +13,59 @@ const icone__olho = document.querySelector(".icone__olho");
 const creditcard = document.querySelector(".creditcard");
 
 function carregardados() {
+    const cpf = localStorage.getItem('cpf');
+    console.log(cpf);
 
-    cpf = localStorage.getItem('cpf');
-    console.log(cpf)
-
-    const urlProd = "https://sistema-bancario-pi.onrender.com/listardados/" + cpf
-    console.log(urlProd)
-    fetch(urlProd).then(resp => resp.json())
+    const urlProd = "https://sistema-bancario-pi.onrender.com/listardados/" + cpf;
+    console.log(urlProd);
+    fetch(urlProd)
+        .then(resp => resp.json())
         .then(data => {
-            if (data != undefined) {
-                data.forEach(element => {
-                    console.log(element);
+            if (data) {  // Verifica se data não é nulo ou indefinido
+                console.log(data);
 
-                    saudacoes__titulo.innerHTML += element.nome
-                    saldo__valor.innerHTML += element.saldo
-                    //                     const div = document.createElement("div");
+                // Verifica se data é um array
+                if (Array.isArray(data)) {
+                    data.forEach(element => {
+                        console.log(element);
+                        saudacoes__titulo.innerHTML += element.nome;
+                        saldo__valor.innerHTML += element.saldo;
 
-                    //                     div.className = "card";
-                    //                     const pnome = document.createElement("p")
-                    //                     pnome.className = "nome"
-                    //                     pnome.innerHTML = element.nome;
-
+                        saudacoes__texto.appendChild(saudacoes__titulo);
+                        saudacoes.appendChild(saudacoes__texto);
+                        saudacoes.appendChild(imagem__tit);
+                        header.appendChild(saudacoes);
+                        saldo__container.appendChild(saldo__valor);
+                        saldo.appendChild(saldo__container);
+                        saldo.appendChild(icone__olho);
+                        body.appendChild(header);
+                        body.appendChild(saldo);
+                        body.appendChild(creditcard);
+                    });
+                } else {
+                    // Se data não é um array, trata-o como um objeto único
+                    console.log(data);
+                    saudacoes__titulo.innerHTML += data.nome;
+                    saldo__valor.innerHTML += data.saldo;
 
                     saudacoes__texto.appendChild(saudacoes__titulo);
-                    //                     // tr.appendChild(ppreco);
-
-
                     saudacoes.appendChild(saudacoes__texto);
                     saudacoes.appendChild(imagem__tit);
                     header.appendChild(saudacoes);
                     saldo__container.appendChild(saldo__valor);
                     saldo.appendChild(saldo__container);
                     saldo.appendChild(icone__olho);
-
                     body.appendChild(header);
                     body.appendChild(saldo);
                     body.appendChild(creditcard);
-
-
-
-                })
+                }
             }
         })
+        .catch(error => {
+            console.error("Erro ao buscar dados:", error);
+        });
 }
+
 
 function ocultar() {
     saldo__valor.classList.toggle('sumir')
