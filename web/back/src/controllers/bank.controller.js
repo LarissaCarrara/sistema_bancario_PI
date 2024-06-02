@@ -24,14 +24,22 @@ const login = async (req, res) => {
 }
 const listardados = async (req, res) => {
 
-    const clientes = await prisma.cliente.findMany();
+    const clientes = await prisma.cliente.findUnique({
+        
+        where: {
+            cpf
+        },
+    }
+    );
 
     if (clientes) {
-        res.status(200).json(clientes).end();
+        if (clientes.cpf == cpf){
+            res.status(200).json(clientes).end();
+        }
     }
     else {
-        res.status(400).json({ erro: "Clientes não encontrados" }).end();
-    }
+        res.status(400).json({ erro: "Cliente não encontrado" }).end();
+    }
 }
 
 const consultarPix = async (req, res) => {

@@ -14,8 +14,11 @@ const creditcard = document.querySelector(".creditcard");
 
 function carregardados() {
 
+    cpf = localStorage.getItem('cpf');
+    console.log(cpf)
 
-    const urlProd = "https://sistema-bancario-pi.onrender.com/listardados"
+    const urlProd = "https://sistema-bancario-pi.onrender.com/listardados/" + cpf
+    console.log(urlProd)
     fetch(urlProd).then(resp => resp.json())
         .then(data => {
             if (data != undefined) {
