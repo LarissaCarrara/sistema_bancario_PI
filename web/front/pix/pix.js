@@ -14,7 +14,7 @@ function fazerPix() {
     fetch(urlProd)
     .then(response => response.json())
     .then(data => {
-        if (data.status === 'success') {
+        if (data.status == 200) {
             console.log('CPF válido');
             window.location.href = "./Home";
         } else {
