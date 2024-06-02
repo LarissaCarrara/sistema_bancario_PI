@@ -14,12 +14,14 @@ function fazerPix() {
     fetch(urlProd)
     .then(response => response.json())
     .then(data => {
-        if (data.status == 200) {
+
+        console.log(data)
+        if (data.erro != "Cliente não encontrado") {
             console.log('CPF válido');
             window.location.href = "./Home";
         } else {
             console.log('CPF inválido');
-        }
+        }   
     })
     .catch(error => console.error('Erro:', error));
 }
