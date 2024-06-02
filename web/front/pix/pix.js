@@ -1,11 +1,15 @@
-const cpfPix = document.getElementById('cpfPix');
+// const { url } = require("inspector");
+
+const cpfPix = document.querySelector('#cpfPix');
 
 
 
 function fazerPix() {
+    console.log("entrei")
+    console.log(cpfPix.value)
     cpf = cpfPix.value
     const urlProd = "https://sistema-bancario-pi.onrender.com/consultarPix/" + cpf;
-
+    console.log(urlProd)
     fetch(urlProd)
     .then(response => response.json())
     .then(data => {

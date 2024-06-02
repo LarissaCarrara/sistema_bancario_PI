@@ -46,8 +46,8 @@ const listardados = async (req, res) => {
 }
 
 const consultarPix = async (req, res) => {
-    const cpf = req.body;
-    console.log(req.body)
+    const cpf = req.params;
+    console.log(req.params)
 
     const clientePix = await prisma.cliente.findUnique({
         where: {
