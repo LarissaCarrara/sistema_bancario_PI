@@ -49,11 +49,20 @@ const consultarPix = async (req, res) => {
     const cpf = req.body;
     console.log(req.body)
 
-    const clinetePix = await prisma.cliente.findUnique({
+    const clientePix = await prisma.cliente.findUnique({
         where: {
             cpf
-        }
+        },
     })
+
+    if (clientes) {
+        if (clientes.cpf == cpf){
+            res.status(200).json(clientes).end();
+        }
+    }
+    else {
+        res.status(400).json({ erro: "Cliente não encontrado" }).end();
+    }
 }
 
 

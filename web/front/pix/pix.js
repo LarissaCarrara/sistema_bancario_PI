@@ -1,18 +1,12 @@
 const cpfPix = document.getElementById('cpfPix');
 
-const urlDev = "http://localhost:3000/login";
-const urlProd = "https://sistema-bancario-pi.onrender.com/login";
+
 
 function fazerPix() {
-    const chave = { cpf: cpfPix.value };
+    cpf = cpfPix.value
+    const urlProd = "https://sistema-bancario-pi.onrender.com/consultarPix/" + cpf;
 
-    fetch(urlDev, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(chave)
-    })
+    fetch(urlProd)
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
