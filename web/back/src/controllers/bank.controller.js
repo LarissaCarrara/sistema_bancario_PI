@@ -49,7 +49,7 @@ const consultarPix = async (req, res) => {
     const cpf = req.params;
     console.log(req.params)
 
-    const clientePix = await prisma.cliente.findUnique({
+    const clientes = await prisma.cliente.findUnique({
         where: {
             cpf
         },
