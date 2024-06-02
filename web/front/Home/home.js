@@ -21,8 +21,16 @@ function carregardados() {
     fetch(urlProd)
         .then(resp => resp.json())
         .then(data => {
+<<<<<<< HEAD
             if (data) {  // Verifica se data não é nulo ou indefinido
                 console.log(data);
+=======
+            console.log(data)
+            if (Array.isArray(data)) {
+                console.log(data);
+                data.forEach(element => {
+                    console.log(element);
+>>>>>>> 06dffc70594f381ed98112f7904d0c9042f78346
 
                 // Verifica se data é um array
                 if (Array.isArray(data)) {
@@ -58,7 +66,16 @@ function carregardados() {
                     body.appendChild(header);
                     body.appendChild(saldo);
                     body.appendChild(creditcard);
+<<<<<<< HEAD
                 }
+=======
+
+
+
+                })
+            }else{
+                console.log("deu erro")
+>>>>>>> 06dffc70594f381ed98112f7904d0c9042f78346
             }
         })
         .catch(error => {
