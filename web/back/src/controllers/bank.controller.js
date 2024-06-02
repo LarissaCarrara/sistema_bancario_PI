@@ -24,6 +24,9 @@ const login = async (req, res) => {
 }
 const listardados = async (req, res) => {
 
+    const { cpf } = req.params;
+    console.log(req.params)
+
     const clientes = await prisma.cliente.findUnique({
         
         where: {
