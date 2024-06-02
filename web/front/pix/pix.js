@@ -6,8 +6,8 @@ const cpfPix = document.querySelector('#cpfPix');
 
 function fazerPix() {
     console.log("entrei")
-    console.log(cpfPix.value)
-    cpf = cpfPix.value
+    cpf = String(cpfPix.value) 
+    console.log(typeof cpf)
     const urlProd = "https://sistema-bancario-pi.onrender.com/consultarPix/" + cpf;
     console.log(urlProd)
     fetch(urlProd)
