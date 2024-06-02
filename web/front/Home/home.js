@@ -21,7 +21,9 @@ function carregardados() {
     console.log(urlProd)
     fetch(urlProd).then(resp => resp.json())
         .then(data => {
-            if (data != undefined) {
+            console.log(data)
+            if (Array.isArray(data)) {
+                console.log(data);
                 data.forEach(element => {
                     console.log(element);
 
@@ -53,6 +55,8 @@ function carregardados() {
 
 
                 })
+            }else{
+                console.log("deu erro")
             }
         })
 }
