@@ -9,7 +9,7 @@ function fazerPix() {
     cpf = String(cpfPix.value) 
     console.log(typeof cpf)
     console.log(cpf)
-    const urlProd = "https://sistema-bancario-pi.onrender.com/consultarPix/" + cpf;
+    const urlProd = "https://sistema-bancario-pi.onrender.com/listardados/" + cpf;
     console.log(urlProd)
     fetch(urlProd)
     .then(response => response.json())
