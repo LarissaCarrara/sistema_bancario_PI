@@ -2,6 +2,7 @@ const { createTransport, createTestAccount } = require("nodemailer");
 const { google } = require("googleapis");
  require("dotenv").config();
 
+ console.log(process.env)
 const twoFactorAuth = async (req, res) => {
   const { code, email: emailDaPessoaQueVaiReceber } = req.body;
 
@@ -9,6 +10,8 @@ const twoFactorAuth = async (req, res) => {
   const clientId = process.env.CLIENT_ID;
   const secret = process.env.SECRET;
   const token = process.env.TOKEN;
+
+
   const redirectUrl = "https://developers.google.com/oauthplayground";
 
   try {
