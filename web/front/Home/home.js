@@ -11,6 +11,8 @@ const saldo__valor = document.querySelector(".saldo__valor");
 const saldo__container = document.querySelector(".saldo__container");
 const icone__olho = document.querySelector(".icone__olho");
 const creditcard = document.querySelector(".creditcard");
+const cartao__nome = document.querySelector(".cartao__nome")
+const cartao__conteudo = document.querySelector(".cartao__conteudo");
 
 function carregardados() {
     const cpf = localStorage.getItem('cpf');
@@ -30,9 +32,11 @@ function carregardados() {
                         console.log(element);
                         saudacoes__titulo.innerHTML += element.nome;
                         saldo__valor.innerHTML += element.saldo;
+                        cartao__nome.innerHTML += element.nome;
 
                         saudacoes__texto.appendChild(saudacoes__titulo);
                         saudacoes.appendChild(saudacoes__texto);
+                        cartao__conteudo.appendChild(cartao__nome);
                         saudacoes.appendChild(imagem__tit);
                         header.appendChild(saudacoes);
                         saldo__container.appendChild(saldo__valor);
@@ -47,9 +51,11 @@ function carregardados() {
                     console.log(data);
                     saudacoes__titulo.innerHTML += data.nome;
                     saldo__valor.innerHTML += data.saldo;
+                    cartao__nome.innerHTML += data.nome
 
                     saudacoes__texto.appendChild(saudacoes__titulo);
                     saudacoes.appendChild(saudacoes__texto);
+                    cartao__conteudo.appendChild(cartao__nome);
                     saudacoes.appendChild(imagem__tit);
                     header.appendChild(saudacoes);
                     saldo__container.appendChild(saldo__valor);
