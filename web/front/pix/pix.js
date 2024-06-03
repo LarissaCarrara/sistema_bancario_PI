@@ -6,11 +6,12 @@ const input = document.querySelector(".pix__dinheiro");
 const cpfPix = document.querySelector("#cpfPix");
 
 function fazerPix() {
-  const cpf_pagamento = cpfPix.value
-  console.log("cpf_pagamento:",cpf_pagamento)
+  const cpf_pagamento = cpfPix.value;
+  console.log("cpf_pagamento:", cpf_pagamento);
   //const { cpf } = JSON.parse(localStorage.getItem("user-safebank"));
-  console.log("cpf: ", cpf)
-  const urlProd = "https://sistema-bancario-pi.onrender.com/listardados/" + cpf_pagamento;
+  console.log("cpf: ", cpf);
+  const urlProd =
+    "https://sistema-bancario-pi.onrender.com/listardados/" + cpf_pagamento;
   // console.log(urlProd)
   fetch(urlProd)
     .then((response) => response.json())
@@ -18,7 +19,7 @@ function fazerPix() {
       console.log(data);
       if (data.erro != "Cliente não encontrado") {
         console.log("CPF válido");
-        localStorage.setItem("dados-pagamento", JSON.stringify(data))
+        localStorage.setItem("dados-pagamento", JSON.stringify(data));
         window.location.href = "./pagamento";
       } else {
         console.log("CPF inválido");

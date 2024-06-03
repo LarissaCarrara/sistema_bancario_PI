@@ -27,7 +27,7 @@ const listardados = async (req, res) => {
     const { cpf } = req.params;
     console.log(req.params)
 
-    const clientes = await prisma.cliente.findUnique({
+    const cliente = await prisma.cliente.findUnique({
         
         where: {
             cpf
@@ -35,12 +35,10 @@ const listardados = async (req, res) => {
     }
     );
 
-    if (clientes) {
-        if (clientes.cpf === cpf){
-            clientes.forEach(element => {
-                delete element.senha
-            });
-            res.status(200).json(clientes).end();
+    if (cliente) {
+        if (cliente.cpf === cpf){
+         
+            res.status(200).json(cliente).end();
         }
     }
     else {

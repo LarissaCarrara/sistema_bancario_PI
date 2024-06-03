@@ -20,6 +20,7 @@ function carregardados() {
     const {cpf} = JSON.parse(user)
 
     const urlProd = "https://sistema-bancario-pi.onrender.com/listardados/" + cpf;
+    const urlDev = "http://localhost:3000/listardados/" + cpf
     fetch(urlProd)
         .then(resp => resp.json())
         .then(data => {
