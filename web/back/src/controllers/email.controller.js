@@ -2,7 +2,6 @@ const { createTransport, createTestAccount } = require("nodemailer");
 const { google } = require("googleapis");
  require("dotenv").config();
 
- console.log(process.env)
 const twoFactorAuth = async (req, res) => {
   const { code, email: emailDaPessoaQueVaiReceber } = req.body;
 
