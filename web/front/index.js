@@ -18,12 +18,16 @@ function entrar(){
        method: 'POST',
        headers: {'Content-Type': 'application/json'},
        body: JSON.stringify(usuario)
-    }) .then(data => {
-        console.log(data)
-        if (data.status == 200) {
+    }) .then(resp => resp.json())
+    .then(data => {
+        console.log(data);
+        if (data != null) {
+            alert("Seja Bem-vindo!")
             console.log(data);
-            localStorage.setItem('cpf', cpf.value)
+            localStorage.setItem('user-safebank', JSON.stringify(data));
             window.location.href = "./Home";
+        }else{
+            alert("Usuário ou senha inválidos")
         }
     })
 }

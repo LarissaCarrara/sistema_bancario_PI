@@ -15,11 +15,11 @@ const cartao__nome = document.querySelector(".cartao__nome")
 const cartao__conteudo = document.querySelector(".cartao__conteudo");
 
 function carregardados() {
-    const cpf = localStorage.getItem('cpf');
-    console.log(cpf);
+    const user = localStorage.getItem('user-safebank');
+
+    const {cpf} = JSON.parse(user)
 
     const urlProd = "https://sistema-bancario-pi.onrender.com/listardados/" + cpf;
-    console.log(urlProd);
     fetch(urlProd)
         .then(resp => resp.json())
         .then(data => {
@@ -84,3 +84,7 @@ function pix(){
 //     window.location.href = "./home.html"
 // }
 
+function sair(){
+    localStorage.clear()
+    window.location.href = "../index.html"
+}

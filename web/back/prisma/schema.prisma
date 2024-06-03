@@ -11,12 +11,23 @@ datasource db {
 }
 
 model Cliente {
-  id       Int      @id @default(autoincrement())
-  nome     String
-  telefone String
-  email    String
-  cpf      String   @unique
-  senha    String
-  saldo    Float
-  limite   Float
+  id        Int         @id @default(autoincrement())
+  nome      String
+  telefone  String
+  email     String
+  cpf       String      @unique
+  senha     String
+  saldo     Float
+  limite    Float
+  Transacao Transacao[]
+}
+
+model Transacao {
+  id        Int      @id @default(autoincrement())
+  data      DateTime @default(now())
+  valor     Float
+  tipo      String
+  descricao String
+  clienteId Int
+  cliente   Cliente  @relation(fields: [clienteId], references: [id])
 }

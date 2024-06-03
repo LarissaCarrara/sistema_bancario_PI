@@ -36,7 +36,10 @@ const listardados = async (req, res) => {
     );
 
     if (clientes) {
-        if (clientes.cpf == cpf){
+        if (clientes.cpf === cpf){
+            clientes.forEach(element => {
+                delete element.senha
+            });
             res.status(200).json(clientes).end();
         }
     }
