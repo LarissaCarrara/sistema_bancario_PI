@@ -1,22 +1,14 @@
 const { createTransport, createTestAccount } = require("nodemailer");
 const { google } = require("googleapis");
+ require("dotenv").config();
 
 const twoFactorAuth = async (req, res) => {
   const { code, email: emailDaPessoaQueVaiReceber } = req.body;
 
-  console.log(req.body)
-
-  // const clientId =
-  //   "177662686395-6g7tnrdoinkctugl9s9vcoruplqgflp7.apps.googleusercontent.com";
-  // const secret = "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";
-  // const token =
-  //   "1//046HT6TRhNMTrCgYIARAAGAQSNwF-L9Irrk80qQhNnU3Xd2fNcEZt-a3CQgrcDWj8OiYHWaKKtW13S8bwtxzlDMQ5Mn45QeBlgnk";
-
-  const clientId =
-    "762945846622-75dghpkqivb83dp4bhlugsc11fvoghu4.apps.googleusercontent.com";
-  const secret = "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";
-  const token =
-    "1//04O2t0kYgHbBtCgYIARAAGAQSNwF-L9IrE0lSPy8pikmEOJavnX3-n6m71RfLe1AbkmSyLf-TR8Bry6XuN4kVXFK4GPGlZJF1wl8";
+  console.log(req.body);
+  const clientId = process.env.CLIENT_ID;
+  const secret = process.env.SECRET;
+  const token = process.env.TOKEN;
   const redirectUrl = "https://developers.google.com/oauthplayground";
 
   try {
