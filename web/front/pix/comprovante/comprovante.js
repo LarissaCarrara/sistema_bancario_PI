@@ -1,7 +1,7 @@
-const pagador = document.querySelector("#pagador")
-const recebido = document.querySelector("#recebido")
-const data = document.querySelector("#data")
-const valor = document.querySelector("#valor")
+const pagador = document.querySelector("#pagador");
+const recebido = document.querySelector("#recebido");
+const dataElem = document.querySelector("#data");
+const valor = document.querySelector("#valor");
 
 const { nome } = JSON.parse(localStorage.getItem("user-safebank"));
 const nome_pagador = JSON.parse(localStorage.getItem("dados-pagamento"));
@@ -20,15 +20,13 @@ const dataFormatada = dataAtual.toLocaleDateString('pt-BR', {
 
 recebido.innerHTML = nome_pagador.nome;
 pagador.innerHTML = `${nome}`;
-data.innerHTML = dataFormatada;
+dataElem.innerHTML = dataFormatada;
 
 const getTransaction = async () => {
-
     const urlParams = new URLSearchParams(window.location.search);
-
     const id = urlParams.get('id');
 
-    const response = await fetch(http://localhost:3000/transaction/${id}, {
+    const response = await fetch(`http://localhost:3000/transaction/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -38,6 +36,6 @@ const getTransaction = async () => {
     const data = await response.json();
 
     console.log(data);
-}
+};
 
 getTransaction();
