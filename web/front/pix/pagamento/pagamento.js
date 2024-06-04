@@ -4,6 +4,9 @@ const body = document.querySelector("body"),
   destinatario = document.querySelector(".destinatario"),
   destinatario__user = document.querySelector(".destinatario__user");
 
+const { email, id } = JSON.parse(localStorage.getItem("user-safebank"));
+const id_pagamento = JSON.parse(localStorage.getItem("dados-pagamento"));
+
 function carregar() {
   const { cpf, saldo } = JSON.parse(localStorage.getItem("user-safebank"));
   const { nome } = JSON.parse(localStorage.getItem("dados-pagamento"));
@@ -12,84 +15,106 @@ function carregar() {
   destinatario__user.innerHTML = `${nome}`;
 }
 
-
 let codigoEnviadoParaOEmail = "";
 
 const showInputCode = () => {
-    const inputCode = document.querySelector("#code-div");
-    inputCode.classList.toggle("hidden");
-    
-}
+  const inputCode = document.querySelector("#code-div");
+  inputCode.classList.toggle("hidden");
+};
 
 async function sendEmailTwoFactorAuth() {
+  const pixValor = document.querySelector("#pixValor").value;
+  if (pixValor <= saldo) {
+    showInputCode();
+    const urlProd = "https://sistema-bancario-pi.onrender.com/twofactorauth";
+    const urlDev = "http://localhost:3000/twofactorauth";
 
-    showInputCode()
-  const { email } = JSON.parse(localStorage.getItem("user-safebank"));
-  const urlProd = "https://sistema-bancario-pi.onrender.com/twofactorauth";
-  const urlDev = "http://localhost:3000/twofactorauth";
+    codigoEnviadoParaOEmail = Math.floor(Math.random() * 10000);
 
-  codigoEnviadoParaOEmail = Math.floor(Math.random() * 10000);
+    const optionsDoFetch = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        code: codigoEnviadoParaOEmail,
+        email,
+      }),
+    };
 
-  const optionsDoFetch = {
+    const response = await fetch(urlDev, optionsDoFetch).then((response) =>
+      response.json()
+    );
+
+    console.log(response);
+
+    console.log("Código enviado para o email: ", codigoEnviadoParaOEmail);
+  } else {
+    alert("Saldo insuficiente");
+  }
+}
+
+const transactionCreate = async (id) => {
+  const response = await fetch("http://localhost:3000/transaction/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      code: codigoEnviadoParaOEmail,
-      email,
+      valor: 100,
+      clienteId: id,
+      descricao: "Pagamento de boleto",
+      tipo: "PIX",
     }),
-  };
+  });
 
-  const response = await fetch(urlDev, optionsDoFetch).then((response) =>
-    response.json()
+  const data = await response.json();
+
+  return data;
+};
+
+const alterarSaldo = async (idQuemEnvia, idQuemRecebe, valor) => {
+  const response = await fetch(
+    `http://localhost:3000/transaction/alterarSaldo`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idQuemEnvia,
+        idQuemRecebe,
+        valor,
+      }),
+    }
   );
 
-  console.log(response);
+  const data = await response.json();
 
-  console.log("Código enviado para o email: ", codigoEnviadoParaOEmail);
-}
+  return data;
+};
 
-const createTransaction = async (id) => {
+const confirmCode = async () => {
+  const code = document.querySelector("#code").value;
+  const {  id } = JSON.parse(localStorage.getItem("user-safebank"));
 
-    const response = await fetch("http://localhost:3000/transaction/create", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            valor: 100,
-            clienteId: id,
-            descricao: "Pagamento de boleto",
-            tipo: "PIX",
-        }),
-    })
+  if (code == codigoEnviadoParaOEmail) {
+    alert("Código válido");
+    await alterarSaldo(id, id_pagamento.id, pixValor);
+    const createTransactionResponse = await createTransaction(id);
+    console.log(createTransactionResponse);
 
-    const data = await response.json();
+    if (createTransactionResponse && !createTransactionResponse.error) {
+      alert("Transação realizada com sucesso");
+      localStorage.setItem("pixvalor", pixValor);
 
-    return data;
-}
+      localStorage.setItem("transaction", JSON.stringify(createTransactionResponse));
 
-const confirmCode = () => {
-    const code = document.querySelector("#code").value;
-    const { email,id } = JSON.parse(localStorage.getItem("user-safebank"));
-  
-    if (code == codigoEnviadoParaOEmail) {
-      alert("Código válido");
-        
-      const createTransactionResponse = createTransaction(id);
-
-      console.log(createTransactionResponse)
-
-        if (createTransactionResponse
-            && !createTransactionResponse.error) {
-            alert("Transação realizada com sucesso");
-            window.location.href = "/comprovante?id="+createTransactionResponse.id
-        } else {
-            alert("Erro ao realizar transação");
-        }
+      window.location.href = "/comprovante?id=" + createTransactionResponse.id;
     } else {
-      alert("Código inválido");
+      alert("Erro ao realizar transação");
     }
-       
-}
+  } else {
+    alert("Código inválido");
+  }
+};

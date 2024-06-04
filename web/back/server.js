@@ -4,7 +4,7 @@ const cors = require("cors"); //segurança do back
 
 const Router_Bank = require("./src/routes/bank.route");
 const Router_Email = require("./src/routes/email.route");
-const Router_Transaction = require("./src/routes/email.route");
+const Router_Transaction = require("./src/routes/transacao.route");
 const app = express();
 
 app.use(cors());

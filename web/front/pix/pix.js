@@ -7,12 +7,12 @@ const cpfPix = document.querySelector("#cpfPix");
 
 function fazerPix() {
   const cpf_pagamento = cpfPix.value;
-  console.log("cpf_pagamento:", cpf_pagamento);
-  //const { cpf } = JSON.parse(localStorage.getItem("user-safebank"));
-  console.log("cpf: ", cpf);
+  
+  const { cpf } = JSON.parse(localStorage.getItem("user-safebank"));
+
   const urlProd =
     "https://sistema-bancario-pi.onrender.com/listardados/" + cpf_pagamento;
-  // console.log(urlProd)
+
   fetch(urlProd)
     .then((response) => response.json())
     .then((data) => {
