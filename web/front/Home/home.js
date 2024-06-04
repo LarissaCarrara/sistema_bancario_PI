@@ -14,10 +14,29 @@ const creditcard = document.querySelector(".creditcard");
 const cartao__nome = document.querySelector(".cartao__nome")
 const cartao__conteudo = document.querySelector(".cartao__conteudo");
 
+const getTransactions = async () => {
+
+    const urlDev = "http://localhost:3000/transaction/"
+
+    const {data, error} = await fetch(urlDev).then(r => r.json())
+
+    if(!error) {
+        data.forEach(transaction => {
+            
+        })
+    }
+    
+    if(error) {
+        alert("Errroooooooo")
+    }
+
+}
+
 function carregardados() {
     const user = localStorage.getItem('user-safebank');
 
     const {cpf} = JSON.parse(user)
+
 
     const urlProd = "https://sistema-bancario-pi.onrender.com/listardados/" + cpf;
     const urlDev = "http://localhost:3000/listardados/" + cpf
@@ -26,7 +45,7 @@ function carregardados() {
         .then(data => {
             if (data) {  // Verifica se data não é nulo ou indefinido
                 console.log(data);
-
+                localStorage.setItem("Saldo", data.saldo)
                 // Verifica se data é um array
                 if (Array.isArray(data)) {
                     data.forEach(element => {

@@ -1,86 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Comprovante Pix</title>
-</head>
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
-    * {
-        box-sizing: border-box;
-    }
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: start;
-        height: 100vh;
-        padding: 2rem;
-    }
-    .content {
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        justify-content: start;
-        width: 80%;
-        max-width: 500px;
-        margin: 0 auto;
-        height: 100%;
-    }
-    .shareBtn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 1rem;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-        width: 100%;
-        margin-top: auto;
-    }
-    .icon {
-        margin-top: 2rem;
-    }
-</style>
-<body>
-    <div class="container">
-       <div class="content">
-        <p>Nome do Pagador: <span id="pagador"></span></p>
-        <p>Nome do Recebido: <span id="recebido"></span></p>.
-        <p>Data: <span id="data" ></span></p>
-        <p>Valor: <span id="valor"></span></p>
-        <lottie-player src="https://lottie.host/b4f9900e-e5e0-47ef-8f0c-911e5e3a346a/ZkOQEMxCYg.json" class="icon" background="#ffffff" speed="1" style="width: 300px; height: 300px" loop  autoplay direction="1" mode="normal"></lottie-player>
-    
-        <button onclick="share()" class="shareBtn">Compartilhar</button>
-       </div>
+    <link rel="stylesheet" href="comprovante.css" />
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <div class="header">
+      <a href="../../Home/" class="voltar">< voltar </a>
     </div>
-</body>
 
-<script>
+    <div class="container">
+      <div class="content">
+        <p class="pagador">Nome do Pagador:</p>
+        <span id="pagador"></span><br />
+        <p class="recebido">Nome do Recebido:</p>
+        <span id="recebido"></span><br />
+        <p class="data">Data:</p>
+        <span id="data"></span><br />
+        <p class="valor">Valor:</p>
+        <span id="valor"></span><br />
+
+        <div class="icone__div">
+          <lottie-player
+            src="https://lottie.host/b4f9900e-e5e0-47ef-8f0c-911e5e3a346a/ZkOQEMxCYg.json"
+            class="icon"
+            background="#ffffff"
+            speed="1"
+            style="width: 40px; height: 40px"
+            loop
+            autoplay
+            direction="1"
+            mode="normal"
+          ></lottie-player>
+        </div>
+        <button onclick="share()" class="shareBtn">Compartilhar</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
     const share = () => {
-        const pagador = document.getElementById('pagador').innerText;
-        const recebido = document.getElementById('recebido').innerText;
-        const data = document.getElementById('data').innerText;
-        const valor = document.getElementById('valor').innerText;
+      const pagador = document.getElementById("pagador").innerText;
+      const recebido = document.getElementById("recebido").innerText;
+      const data = document.getElementById("data").innerText;
+      const valor = document.getElementById("valor").innerText;
 
-        const text = `Nome do Pagador: ${pagador}\nNome do Recebido: ${recebido}\nData: ${data}\nValor: ${valor}`;
+      const text = `Nome do Pagador: ${pagador}\nNome do Recebido: ${recebido}\nData: ${data}\nValor: ${valor}`;
 
-        if (navigator.share) {
-            navigator.share({
-                title: 'Comprovante Pix',
-                text: text
-            })
-            .then(() => console.log('Successful share'))
-            .catch((error) => console.log('Error sharing', error));
-        } else {
-            console.log('Web Share API not supported');
-        }
-    }
-</script>
+      if (navigator.share) {
+        navigator
+          .share({
+            title: "Comprovante Pix",
+            text: text,
+          })
+          .then(() => console.log("Successful share"))
+          .catch((error) => console.log("Error sharing", error));
+      } else {
+        console.log("Web Share API not supported");
+      }
+    };
+  </script>
 
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-<script src="./comprovante.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="./comprovante.js"></script>
 </html>

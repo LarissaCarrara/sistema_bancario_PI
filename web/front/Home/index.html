@@ -9,14 +9,14 @@
 </head>
 <body onload="carregardados()">
     <div class="sair">
-        <p onclick="sair()">< sair</p>
+        <p onclick="sair()"> sair</p>
     </div>
   <!-- Header do Home -->
     <header class="saudacoes__container">
 
         <div class='saudacoes'>
             <div class='saudacoes__texto'>
-                <p class='saudacoes__titulo'>Hi </p>
+                <p class='saudacoes__titulo'>Olá, </p>
             </div>
                 <img class="imagem__tit"
                     src='../imagens/img_perfil.png'
@@ -55,6 +55,13 @@
 
         <div class="btn__pix">
           <input type="button" value="Pix" id="btn_pix" onclick="pix()">
+        </div>
+
+        <div class="extrato ">
+          <div class="btnVerExtra"><button>Ver extrato</button> <span>+</span></div>
+          <div class="container-extrato hidden">
+            <ul  class="list"></ul>
+          </div>
         </div>
         </section>
       </div>

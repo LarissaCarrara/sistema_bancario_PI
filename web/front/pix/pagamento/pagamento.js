@@ -6,12 +6,13 @@ const body = document.querySelector("body"),
 
 const { email, id } = JSON.parse(localStorage.getItem("user-safebank"));
 const id_pagamento = JSON.parse(localStorage.getItem("dados-pagamento"));
+const Saldo = JSON.parse(localStorage.getItem("Saldo"));
 
 function carregar() {
   const { cpf, saldo } = JSON.parse(localStorage.getItem("user-safebank"));
   const { nome } = JSON.parse(localStorage.getItem("dados-pagamento"));
 
-  saldo__reais.innerHTML = `R$ ${saldo}`;
+  saldo__reais.innerHTML = `R$ ${Saldo}`;
   destinatario__user.innerHTML = `${nome}`;
 }
 
@@ -24,7 +25,8 @@ const showInputCode = () => {
 
 async function sendEmailTwoFactorAuth() {
   const pixValor = document.querySelector("#pixValor").value;
-  if (pixValor <= saldo) {
+  console.log(pixValor,saldo)
+  if (pixValor <= saldo && pixValor > 0) {
     showInputCode();
     const urlProd = "https://sistema-bancario-pi.onrender.com/twofactorauth";
     const urlDev = "http://localhost:3000/twofactorauth";
@@ -50,18 +52,18 @@ async function sendEmailTwoFactorAuth() {
 
     console.log("Código enviado para o email: ", codigoEnviadoParaOEmail);
   } else {
-    alert("Saldo insuficiente");
+    alert("Valor inválido");
   }
 }
 
-const transactionCreate = async (id) => {
+const createTransaction = async (id, pixValor) => {
   const response = await fetch("http://localhost:3000/transaction/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      valor: 100,
+      valor: Number(pixValor),
       clienteId: id,
       descricao: "Pagamento de boleto",
       tipo: "PIX",
@@ -77,7 +79,7 @@ const alterarSaldo = async (idQuemEnvia, idQuemRecebe, valor) => {
   const response = await fetch(
     `http://localhost:3000/transaction/alterarSaldo`,
     {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -93,24 +95,29 @@ const alterarSaldo = async (idQuemEnvia, idQuemRecebe, valor) => {
 
   return data;
 };
+// CAMACHO MUDA O VALOR DO PIX PARA VALORPIX NO TRASACTION NO LOCALSTORAGE
 
 const confirmCode = async () => {
+  const pixValor = document.querySelector("#pixValor").value;
   const code = document.querySelector("#code").value;
-  const {  id } = JSON.parse(localStorage.getItem("user-safebank"));
 
-  if (code == codigoEnviadoParaOEmail) {
-    alert("Código válido");
-    await alterarSaldo(id, id_pagamento.id, pixValor);
-    const createTransactionResponse = await createTransaction(id);
+  const { id } = JSON.parse(localStorage.getItem("user-safebank"));
+
+  console.log("ENTEROU NA FUNCAO", id_pagamento.id, id, pixValor)
+
+  if (Number(code) === Number(codigoEnviadoParaOEmail)) {
+    // alert("Código válido");
+    const alterarSaldoResponse = await alterarSaldo(id, id_pagamento.id, pixValor);
+    console.log(alterarSaldoResponse)
+    const createTransactionResponse = await createTransaction(id,pixValor);
     console.log(createTransactionResponse);
 
     if (createTransactionResponse && !createTransactionResponse.error) {
-      alert("Transação realizada com sucesso");
-      localStorage.setItem("pixvalor", pixValor);
-
       localStorage.setItem("transaction", JSON.stringify(createTransactionResponse));
+      alert("Transação realizada com sucesso");
+      window.location.href = "../comprovante";
 
-      window.location.href = "/comprovante?id=" + createTransactionResponse.id;
+
     } else {
       alert("Erro ao realizar transação");
     }

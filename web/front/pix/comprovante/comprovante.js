@@ -5,6 +5,7 @@ const valor = document.querySelector("#valor");
 const pixValor = localStorage.getItem("pixvalor");
 const { nome } = JSON.parse(localStorage.getItem("user-safebank"));
 const nome_pagador = JSON.parse(localStorage.getItem("dados-pagamento"));
+const {valorpix} = JSON.parse(localStorage.getItem("trasaction"));
 
 const dataAtual = new Date();
 
